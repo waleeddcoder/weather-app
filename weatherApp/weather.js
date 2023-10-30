@@ -89,7 +89,11 @@ const getCityCoordinates = () => {
     loading.style.display = "flex";
 
     const cityName = cityInput.value.trim();
-    if (!cityName) return;
+    if (cityName === "") {
+        loading.style.display = "none"; // Hide the loading spinner
+        alert("Please enter a city name"); // Show an alert for an empty field
+        return;
+    }
     const GEOCODING_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}
     `;
     fetch(GEOCODING_API_URL)
