@@ -72,7 +72,7 @@ const getWeatherDetails = (cityName, lat, lon) => {
             });
         })
         .catch(() => {
-            alert("an error occured in weather fetching");
+            alert("An error occurred while fetching the weather forecast!");
         });
 };
 
@@ -88,14 +88,15 @@ const getCityCoordinates = () => {
         .then((data) => {
             loading.style.display = "none";
 
-            if (!data.length) return alert("you entered an invalid name");
+            if (!data.length)
+                return alert(`No coordinates found for ${cityName}`);
             const { name, lat, lon } = data[0];
             getWeatherDetails(name, lat, lon);
         })
         .catch(() => {
             loading.style.display = "none";
 
-            alert("an error occured");
+            alert("An error occurred while fetching the coordinates!");
         });
 };
 const getUserCoordinates = () => {
@@ -111,7 +112,7 @@ const getUserCoordinates = () => {
                     getWeatherDetails(name, latitude, longitude);
                 })
                 .catch(() => {
-                    alert("an error occured while fetching the city");
+                    alert("An error occurred while fetching the city name!");
                 });
         },
         (error) => {
