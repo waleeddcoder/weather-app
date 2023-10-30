@@ -7,10 +7,19 @@ const weatherCardsDiv = document.querySelector(".weather-cards");
 const API_KEY = "b3404a891a03654926f96bf1de76b2ae";
 
 const createWeatherCard = (cityName, weatherItem, index) => {
+    const weatherDate = new Date(weatherItem.dt_txt + " UTC");
+    const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    };
+    const formattedDate = weatherDate.toLocaleDateString("en-US", options);
+
     if (index === 0) {
         return `
         <div class="details">
-            <h2>${cityName} (${weatherItem.dt_txt.split(" ")[0]})</h2>
+            <h2>${cityName}—${formattedDate}</h2>
             <h6>Temperature: ${(weatherItem.main.temp - 273.15).toFixed(
                 2
             )}°C</h6>
@@ -26,7 +35,7 @@ const createWeatherCard = (cityName, weatherItem, index) => {
     } else {
         return `
                 <li class="card">
-                    <h3>(${weatherItem.dt_txt.split(" ")[0]})</h3>
+                    <h3>${formattedDate}</h3>
                     <img src="https://openweathermap.org/img/wn/${
                         weatherItem.weather[0].icon
                     }@4x.png" alt="weather-icon">
